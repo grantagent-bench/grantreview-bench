@@ -4,7 +4,6 @@
 
 > If you know of a larger open corpus with real declined proposals at scale, please contact us — we will run our recommended evaluation protocol on it and publish a comparison.
 
-**Companion paper (NeurIPS 2026 Datasets & Benchmarks):** [`paper/paper.pdf`](paper/paper.pdf) — *GrantReview-Bench: A Multi-Funder Open Benchmark for Evaluating LLM Grant Review Systems with a Recommended Two-Confound Evaluation Protocol*
 
 **Companion system paper (NLP4Science 2026):** *When Open Grant Corpora Cannot Teach LLMs to Discriminate*
 
