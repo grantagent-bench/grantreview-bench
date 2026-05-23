@@ -4,9 +4,6 @@
 
 > If you know of a larger open corpus with real declined proposals at scale, please contact us — we will run our recommended evaluation protocol on it and publish a comparison.
 
-
-**Companion system paper (NLP4Science 2026):** *When Open Grant Corpora Cannot Teach LLMs to Discriminate*
-
 **Maintainer:** 
 
 ---
@@ -14,7 +11,9 @@
 ## Quickstart — reproduce every paper number from scratch
 
 ```bash
+
 git clone https://github.com/grantagent-bench/grantreview-bench   # private until paper acceptance; reviewers may request access
+# If git does not work, download .zip from this repo
 cd grantreview-bench
 pip install -r code/requirements.txt
 
