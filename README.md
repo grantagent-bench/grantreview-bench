@@ -112,6 +112,5 @@ PRs welcome for:
 
 PRs that add documents must include a per-document license statement and provenance link.
 
-## Contact
 
 Ben Torkian, University of South Carolina, `torkian@sc.edu`. GitHub issues welcome. Response time: ≤2 weeks for license / takedown questions, ≤4 weeks for general issues.
