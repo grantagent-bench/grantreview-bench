@@ -38,7 +38,7 @@ All numbers are produced by these scripts with `random.seed(42)`, `np.random.see
 
 A 5-sub-corpus inter-source label-transfer matrix shows that **awarded/declined labels do not transfer across funder sub-corpora** — across 20 off-diagonal cells, AUCs concentrate around chance and **no cell survives Bonferroni or BH multiple-comparison correction at α=0.05**. The most extreme cell (OG-NSF/NSERC → OG-EU/ERC: AUC 0.08, 95% CI [0.00, 0.32], uncorrected permutation p=0.024) suggests *anti-correlation* — labels predicting the opposite outcome across funders. Direct empirical evidence that open multi-funder grant data does not yet encode a portable concept of quality.
 
-## Recommended evaluation protocol (Paper §5)
+## Recommended evaluation protocol
 
 Future system papers using this corpus should report:
 
@@ -48,8 +48,6 @@ Future system papers using this corpus should report:
 4. **Inter-source transfer matrix** for any cross-funder generalization claim.
 5. **Multiple-comparison correction** (Bonferroni or BH) across pairwise tests.
 6. **Bootstrap CIs** on every reported AUC.
-
-Reference baseline numbers for 8 systems are in Table 6 of the paper.
 
 ## Repository layout
 
