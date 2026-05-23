@@ -41,6 +41,6 @@ The PDF-extraction subprocess in `data/build_master_v2.py` uses `sys.executable`
 
 The document text itself. The corpus is distributed in three tiers (per the top-level `LICENSE.md`):
 
-- **Redistributed via HuggingFace:** Open Grants (CC BY 4.0) + Wellcome ORF (fair-use academic research with attribution) — `huggingface.co/datasets/torkian/grantreview-bench`
+
 - **Link-only:** NIH/NSF/SERC — fetched by `data/build_master_v2.py`
 - **Per-file:** declined extras — see `../data/declined_extras_provenance.json`
