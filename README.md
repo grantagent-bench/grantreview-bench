@@ -97,7 +97,7 @@ This repo ships the **manifest, splits, audit artifacts, and code** — but not 
 
 ## License
 
-Mixed per-source — see [`LICENSE.md`](LICENSE.md). Released for **non-commercial academic research**. Opt-out / takedown SLA: ≤4 weeks via `torkian@sc.edu`.
+Mixed per-source — see [`LICENSE.md`](LICENSE.md). Released for **non-commercial academic research**. Opt-out / takedown SLA: ≤4 weeks.
 
 ## Citation
 
