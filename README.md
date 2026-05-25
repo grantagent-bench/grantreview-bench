@@ -2,6 +2,8 @@
 
 **The largest open evaluation corpus we know of for LLM-based grant proposal review** — N=455 real proposals across 8 sources and 10 funder families, with 194 confirmed declined examples (4.1× the prior largest open corpus). Paired with 61 NIH peer-reviewer summary statements for per-criterion alignment.
 
+Please leave us a comment if you would like to download the whole corpus.
+
 > If you know of a larger open corpus with real declined proposals at scale, please contact us — we will run our recommended evaluation protocol on it and publish a comparison.
 
 **Maintainer:** 
