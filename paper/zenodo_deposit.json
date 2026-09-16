@@ -1,0 +1,44 @@
+{
+  "_comment": "Zenodo deposit metadata for GrantReview-Bench v1.0. Upload via Zenodo's REST API or web UI. Use this exact JSON as the `metadata` field of the deposit. The DOI is minted on first upload and never changes; subsequent versions get a versioned DOI but share a concept-DOI.",
+  "title": "GrantReview-Bench v1.0: A Multi-Funder Open Benchmark for Evaluating LLM Grant Review Systems",
+  "upload_type": "dataset",
+  "description": "<p>GrantReview-Bench v1.0 is the largest open evaluation corpus the maintainer is aware of for LLM-based grant proposal review (N=455 real proposals across 8 sources and 10 funder families; 194 confirmed declined examples; paired with 61 NIH peer-reviewer summary statements). It is released alongside a recommended two-confound evaluation protocol (length-quartile-stratified AUC + per-source AUC + GroupKFold-by-source CV) and reference baselines for 8 systems.</p><p>The headline empirical finding is a 5-sub-corpus inter-source label-transfer matrix showing that awarded/declined labels do not transfer across funder sub-corpora — across 20 off-diagonal cells, AUCs concentrate around chance and no cell survives Bonferroni or BH multiple-comparison correction. The corpus is therefore released not as a leaderboard where higher AUC is the goal, but as a resource for studying why open multi-funder grant data resists generalization, and as a falsifiability invitation for extending the corpus with non-voluntary-share declined examples.</p><p>If you know of a larger open corpus with real declined proposals at scale, please contact the maintainer (a GitHub issue at https://github.com/grantagent-bench/grantreview-bench/issues) — we will run our recommended protocol on it and publish a comparison.</p>",
+  "creators": [
+    {
+      "name": "GrantReview-Bench maintainers",
+      "orcid": ""
+    }
+  ],
+  "keywords": [
+    "grant-review",
+    "peer-review",
+    "evaluation",
+    "llm-evaluation",
+    "science-of-science",
+    "bibliometrics",
+    "negative-results",
+    "recommended-evaluation-protocol",
+    "NeurIPS Datasets and Benchmarks 2026"
+  ],
+  "license": "other-open",
+  "access_right": "open",
+  "publication_date": "2026-06-15",
+  "language": "eng",
+  "version": "1.0.0",
+  "related_identifiers": [
+    {
+      "identifier": "https://huggingface.co/datasets/grantreview-bench",
+      "relation": "isAlternateIdentifier",
+      "scheme": "url"
+    },
+    {
+      "identifier": "https://github.com/grantagent-bench/grantreview-bench",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ],
+  "communities": [
+    {"identifier": "datasets-and-benchmarks-2026"}
+  ],
+  "notes": "Companion paper: 'GrantReview-Bench: A Multi-Funder Open Benchmark for Evaluating LLM Grant Review Systems with a Recommended Two-Confound Evaluation Protocol' (under review, NeurIPS 2026 Datasets and Benchmarks). System paper companion: 'When Open Grant Corpora Cannot Teach LLMs to Discriminate' (NLP4Science 2026, same author)."
+}

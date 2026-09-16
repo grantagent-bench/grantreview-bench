@@ -1,0 +1,75 @@
+{
+  "_comment": "Per-file provenance for the 10 declined-extra entries in GrantReview-Bench v1.0. Each entry: filename, funder, license_basis, redistribution_decision.",
+  "entries": [
+    {
+      "filename": "bbsrc_decline_1.pdf",
+      "funder_family": "BBSRC",
+      "label": "declined",
+      "license_basis": "Author share with redistribution permission",
+      "redistribution_decision": "link-only (author preference)"
+    },
+    {
+      "filename": "bbsrc_decline_2.pdf",
+      "funder_family": "BBSRC",
+      "label": "declined",
+      "license_basis": "Author share with redistribution permission",
+      "redistribution_decision": "link-only (author preference)"
+    },
+    {
+      "filename": "bbsrc_award_1.pdf",
+      "funder_family": "BBSRC",
+      "label": "awarded",
+      "license_basis": "Author share with redistribution permission",
+      "redistribution_decision": "link-only (author preference)"
+    },
+    {
+      "filename": "embo_decline_1.pdf",
+      "funder_family": "EMBO",
+      "label": "declined",
+      "license_basis": "Author share, anonymized",
+      "redistribution_decision": "link-only"
+    },
+    {
+      "filename": "embo_decline_2.pdf",
+      "funder_family": "EMBO",
+      "label": "declined",
+      "license_basis": "Author share, anonymized",
+      "redistribution_decision": "link-only"
+    },
+    {
+      "filename": "hhmi_decline_1.pdf",
+      "funder_family": "HHMI",
+      "label": "declined",
+      "license_basis": "Author share, anonymized",
+      "redistribution_decision": "link-only"
+    },
+    {
+      "filename": "erc_anon_decline_1.pdf",
+      "funder_family": "EU/ERC",
+      "label": "declined",
+      "license_basis": "ERC anonymized author share",
+      "redistribution_decision": "redistribute (anonymized at source)"
+    },
+    {
+      "filename": "erc_anon_decline_2.pdf",
+      "funder_family": "EU/ERC",
+      "label": "declined",
+      "license_basis": "ERC anonymized author share",
+      "redistribution_decision": "redistribute (anonymized at source)"
+    },
+    {
+      "filename": "dept_ed_foia_decline_1.pdf",
+      "funder_family": "US Dept of Education",
+      "label": "declined",
+      "license_basis": "FOIA release (5 U.S.C. § 552; public record)",
+      "redistribution_decision": "redistribute (public record)"
+    },
+    {
+      "filename": "unknown_decline_1.pdf",
+      "funder_family": "Unknown",
+      "label": "declined",
+      "license_basis": "Author share",
+      "redistribution_decision": "link-only"
+    }
+  ]
+}

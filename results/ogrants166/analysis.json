@@ -1,0 +1,74 @@
+{
+  "component_contributions": [
+    {
+      "component": "Debate",
+      "removed_system": "no_debate",
+      "acc_full": 42.2,
+      "acc_ablated": 43.4,
+      "delta_pp": -1.2,
+      "mcnemar_p": 0.823803
+    },
+    {
+      "component": "Meta-review",
+      "removed_system": "no_meta",
+      "acc_full": 42.2,
+      "acc_ablated": 42.8,
+      "delta_pp": -0.6,
+      "mcnemar_p": 1.0
+    },
+    {
+      "component": "Guardrails",
+      "removed_system": "no_guardrails",
+      "acc_full": 42.2,
+      "acc_ablated": 43.4,
+      "delta_pp": -1.2,
+      "mcnemar_p": 0.831812
+    },
+    {
+      "component": "Retrieval",
+      "removed_system": "no_retrieval",
+      "acc_full": 42.2,
+      "acc_ablated": 40.4,
+      "delta_pp": 1.8,
+      "mcnemar_p": 0.728332
+    },
+    {
+      "component": "Debate+Meta+Guardrails (all extras)",
+      "removed_system": "agents_only",
+      "acc_full": 42.2,
+      "acc_ablated": 43.4,
+      "delta_pp": -1.2,
+      "mcnemar_p": 0.831812
+    }
+  ],
+  "budget_matched": {
+    "full_acc": 42.2,
+    "sc_system": "self_consistency@30",
+    "sc_acc": 62.1,
+    "full_tokens_per_prop": 33432.4,
+    "sc_tokens_per_prop": 54988.4,
+    "token_ratio_full_over_sc": 0.61,
+    "delta_pp": -19.9,
+    "mcnemar_p": 8.8e-05
+  },
+  "cheap_baseline_gap": {
+    "reference": "full",
+    "reference_acc": 42.2,
+    "single_call": {
+      "acc": 62.1,
+      "delta_pp_vs_ref": -19.9,
+      "mcnemar_p": 8.8e-05
+    },
+    "retrieval_knn": {
+      "acc": 67.5,
+      "delta_pp_vs_ref": -25.3,
+      "mcnemar_p": 7e-06
+    },
+    "multi_criteria_single_call": {
+      "acc": 68.7,
+      "delta_pp_vs_ref": -26.5,
+      "mcnemar_p": 1e-06
+    }
+  },
+  "narrative": "## Findings (ogrants166, N=166, model gpt-4o-mini-2024-07-18)\n\n- **Reference system** `full`: 42.2% accuracy.\n- A **single LLM call** reaches 62.1% (-19.9pp vs full, McNemar p=8.8e-05, sig.).\n- **Retrieval-only k-NN** (no generation) reaches 67.5% (-25.3pp vs full).\n- **Is it just more compute?** The full pipeline spends ~0.61\u00d7 the tokens of self_consistency@30, yet scores 42.2% vs 62.1% (-19.9pp, McNemar p=8.8e-05 \u2014 distinguishable at matched budget).\n- **Component contributions (full \u2212 ablated):**\n    - Debate: -1.2pp (McNemar p=0.823803, n.s.)\n    - Meta-review: -0.6pp (McNemar p=1.0, n.s.)\n    - Guardrails: -1.2pp (McNemar p=0.831812, n.s.)\n    - Retrieval: +1.8pp (McNemar p=0.728332, n.s.)\n    - Debate+Meta+Guardrails (all extras): -1.2pp (McNemar p=0.831812, n.s.)"
+}

@@ -1,0 +1,44 @@
+# Build artifacts
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.pytest_cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env / secrets — never commit these to a public repo
+.env
+.env.local
+*.key
+*.pem
+secrets.json
+
+# Re-identification mapping for the anonymized manifest — never publish
+data/anon_mapping.PRIVATE.json
+*.PRIVATE.json
+
+# IDE
+.vscode/
+.idea/
+
+# Local document text (not redistributable from this repo — fetched via build_master.py / HuggingFace)
+data/ogrants/
+data/wellcome/text/
+data/niaid/
+data/nci/
+data/nidcd/
+data/nhgri/
+data/serc/
+data/declined_extra/
+data/dept_ed/

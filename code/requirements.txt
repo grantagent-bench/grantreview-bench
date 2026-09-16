@@ -1,0 +1,20 @@
+# Pinned for reproducibility (Paper 2 — GrantReview-Bench v1.0).
+# Versions match the environment that produced the reference baselines in §6.
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+python-multipart==0.0.9
+pydantic==2.9.2
+python-dotenv==1.0.1
+sentence-transformers==4.1.0
+chromadb==0.4.24
+faiss-cpu==1.8.0.post1
+pymupdf==1.26.0
+python-docx==1.1.2
+numpy==1.26.4
+pyyaml==6.0.1
+openai==1.77.0
+sse-starlette==2.1.0
+sqlalchemy==2.0.30
+# Analysis (Paper 2 §5–§6 reproducibility):
+scikit-learn==1.4.2
+matplotlib==3.8.4

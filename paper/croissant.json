@@ -1,0 +1,141 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "cr": "http://mlcommons.org/croissant/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "examples": {
+      "@id": "cr:examples",
+      "@type": "@json"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform"
+  },
+  "@type": "sc:Dataset",
+  "name": "GrantReview-Bench",
+  "description": "GrantReview-Bench v1.0 — the largest open evaluation corpus we know of for LLM-based grant proposal review (N=455 real proposals across 8 sources and 10 funder families; 194 confirmed declined examples; paired with 61 NIH peer-reviewer summary statements). Released with a recommended two-confound evaluation protocol (length-quartile-stratified AUC + per-source AUC + GroupKFold-by-source CV) and reference baselines for 8 systems. See companion paper for the inter-source label-transfer matrix headline analysis.",
+  "conformsTo": "http://mlcommons.org/croissant/1.0",
+  "version": "1.0.0",
+  "license": "https://github.com/grantagent-bench/grantreview-bench/blob/main/LICENSE.md",
+  "url": "https://huggingface.co/datasets/grantreview-bench",
+  "datePublished": "2026-06-15",
+  "creator": {
+    "@type": "Organization",
+    "name": "The GrantReview-Bench maintainers",
+    "url": "https://github.com/grantagent-bench/grantreview-bench/issues"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "HuggingFace"
+  },
+  "keywords": [
+    "grant-review",
+    "peer-review",
+    "evaluation",
+    "llm-evaluation",
+    "science-of-science",
+    "bibliometrics",
+    "negative-results",
+    "recommended-evaluation-protocol"
+  ],
+  "citeAs": "@misc{grantreviewbench2026, author = {GrantReview-Bench maintainers}, title = {GrantReview-Bench v1.0: A Multi-Funder Open Benchmark for LLM Grant Review Systems}, year = {2026}, publisher = {HuggingFace}, url = {https://huggingface.co/datasets/grantreview-bench}}",
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "splits-train",
+      "name": "splits/train.jsonl",
+      "description": "Training split (302 records).",
+      "contentUrl": "splits/train.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "sha256": "PENDING_AT_RELEASE"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "splits-dev",
+      "name": "splits/dev.jsonl",
+      "description": "Dev split (65 records).",
+      "contentUrl": "splits/dev.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "sha256": "PENDING_AT_RELEASE"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "splits-test",
+      "name": "splits/test.jsonl",
+      "description": "Test split (66 records).",
+      "contentUrl": "splits/test.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "sha256": "PENDING_AT_RELEASE"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "splits-shift-holdout",
+      "name": "splits/shift_holdout_serc.jsonl",
+      "description": "Single-class out-of-distribution score-distribution probe (22 awarded, 0 declined; AUC not computable — see paper §5.4).",
+      "contentUrl": "splits/shift_holdout_serc.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "sha256": "PENDING_AT_RELEASE"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "paired-summary-statements",
+      "name": "paired/summary_statements.jsonl",
+      "description": "61 NIH peer-reviewer summary statements paired with the corresponding application (NIAID + NIDCD only).",
+      "contentUrl": "paired/summary_statements.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "sha256": "PENDING_AT_RELEASE"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "applications",
+      "name": "applications",
+      "description": "One record per grant application (455 total: 261 awarded, 194 declined).",
+      "field": [
+        {"@type": "cr:Field", "@id": "applications/filename",        "name": "filename",        "dataType": "sc:Text"},
+        {"@type": "cr:Field", "@id": "applications/source_dataset",  "name": "source_dataset",  "dataType": "sc:Text", "description": "One of: ogrants, wellcome, niaid, nci, nidcd, nhgri, serc, declined_extra"},
+        {"@type": "cr:Field", "@id": "applications/label",           "name": "label",           "dataType": "sc:Text", "description": "awarded or declined"},
+        {"@type": "cr:Field", "@id": "applications/funder",          "name": "funder",          "dataType": "sc:Text"},
+        {"@type": "cr:Field", "@id": "applications/funder_family",   "name": "funder_family",   "dataType": "sc:Text", "description": "Normalized: NSF/NSERC, NIH, Wellcome, EU/ERC, Private, Other"},
+        {"@type": "cr:Field", "@id": "applications/format",          "name": "format",          "dataType": "sc:Text", "description": "pdf or txt"},
+        {"@type": "cr:Field", "@id": "applications/words",           "name": "words",           "dataType": "sc:Integer"},
+        {"@type": "cr:Field", "@id": "applications/text",            "name": "text",            "dataType": "sc:Text"},
+        {"@type": "cr:Field", "@id": "applications/extra",           "name": "extra",           "dataType": "sc:Text", "description": "Optional source-specific metadata, JSON-encoded since fields vary per source. Empty string for sources with no source-specific metadata."}
+      ]
+    }
+  ],
+  "isLiveDataset": false
+}

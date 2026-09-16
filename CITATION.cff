@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+title: "GrantReview-Bench v1.0: A Multi-Funder Open Benchmark for Evaluating LLM Grant Review Systems"
+message: "If you use this corpus, please cite the companion paper."
+type: dataset
+authors:
+  -
+    email: "a GitHub issue at https://github.com/grantagent-bench/grantreview-bench/issues"
+version: "1.0.0"
+date-released: "2026-06-15"
+license: "other-open"
+url: "https://huggingface.co/datasets/grantreview-bench"
+repository-code: "https://github.com/grantagent-bench/grantreview-bench"
+preferred-citation:
+  type: conference-paper
+  title: "GrantReview-Bench: A Multi-Funder Open Benchmark for Evaluating LLM Grant Review Systems with a Recommended Two-Confound Evaluation Protocol"
+  authors:
+    -
+  conference:
+    name: "NeurIPS 2026 Datasets and Benchmarks Track"
+  year: 2026
+keywords:
+  - grant-review
+  - peer-review
+  - evaluation
+  - llm-evaluation
+  - science-of-science
+  - bibliometrics
+  - negative-results
+  - recommended-evaluation-protocol
