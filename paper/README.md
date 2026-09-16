@@ -22,7 +22,7 @@ All numbers in the paper are produced by the released code. From the repo root:
 
 ```bash
 # Pin dependencies
-pip install -r backend/requirements.txt
+pip install -r code/requirements.txt
 
 # Build the master manifest (portable; uses sys.executable + Path-relative DATA)
 python data/build_master_v2.py
@@ -38,11 +38,11 @@ python data/wellcome_label_audit.py --score data/wellcome_audit_gold.jsonl
 # Expected: Rule-vs-human 50/50 (Wilson 95% CI [0.929, 1.000])
 
 # Reproduce §5.3 inter-source label-transfer matrix (bootstrap CIs + permutation null)
-python backend/scripts/analyze_inter_source_transfer.py
-# Output: backend/runs/analysis/inter_source_transfer.json
+python code/analysis/analyze_inter_source_transfer.py
+# Output: data/inter_source_transfer.json
 
 # Reproduce Table 6 GroupKFold AUC column from per-baseline run files
-python backend/scripts/analyze_groupkfold_auc.py
+python code/analysis/analyze_groupkfold_auc.py
 ```
 
 ## Pinned model snapshots (used to produce Table 6)

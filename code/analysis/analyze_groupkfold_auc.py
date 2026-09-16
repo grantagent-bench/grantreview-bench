@@ -25,10 +25,10 @@ Reproducibility
 
 Usage
 -----
-    python backend/scripts/analyze_groupkfold_auc.py
+    python code/analysis/analyze_groupkfold_auc.py
         Prints the GroupKFold AUC column for all baselines that have run/*/*.json files.
 
-    python backend/scripts/analyze_groupkfold_auc.py --baseline length
+    python code/analysis/analyze_groupkfold_auc.py --baseline length
         Single baseline.
 """
 from __future__ import annotations
@@ -42,7 +42,7 @@ from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import GroupKFold
 
 ROOT = Path(__file__).resolve().parents[2]
-# Per-baseline result dirs live under backend/runs/baselines/{baseline}/.
+# Per-baseline result dirs live under the directory given by --runs-dir.
 # Override with --runs-dir if your layout differs.
 RUNS = ROOT / "backend" / "runs" / "baselines"
 DEFAULT_BASELINES = (

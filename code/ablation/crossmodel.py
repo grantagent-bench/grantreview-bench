@@ -3,7 +3,7 @@
 Re-aggregates each tag with the current metrics code (pure cache read), then emits
 a compact per-model table: same 40 source-controlled proposals, same systems.
 
-Usage:  python -m scripts.ablation.crossmodel
+Usage:  python -m ablation.crossmodel
 """
 from __future__ import annotations
 
@@ -35,7 +35,7 @@ SYSTEMS_ARG = "retrieval_knn,single_call,multi_criteria_single_call,agents_only,
 def reaggregate(tag: str) -> None:
     """Regenerate the tag's report from its checkpoint (no LLM calls)."""
     subprocess.run(
-        [sys.executable, "-m", "scripts.ablation.run",
+        [sys.executable, "-m", "ablation.run",
          "--systems", SYSTEMS_ARG, "--source", "ogrants", "--balance", "20",
          "--tag", tag],
         cwd=BACKEND, capture_output=True, text=True, timeout=600,

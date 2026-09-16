@@ -5,7 +5,7 @@ Reads results/<tag>/ablation_report.json and emits:
   * the budget-matched comparison: full vs self_consistency@N at similar token cost
   * a plain-English findings block for "When Multi-Agent LLM Grant Review Fails"
 
-Usage:  python -m scripts.ablation.analyze --tag paired20
+Usage:  python -m ablation.analyze --tag paired20
 """
 from __future__ import annotations
 
@@ -13,8 +13,8 @@ import argparse
 import json
 from pathlib import Path
 
-BACKEND_DIR = Path(__file__).resolve().parents[2]
-OUT_DIR = BACKEND_DIR / "scripts" / "ablation" / "results"
+REPO_DIR = Path(__file__).resolve().parents[2]
+OUT_DIR = REPO_DIR / "results"
 
 
 def _sig_label(p) -> str:

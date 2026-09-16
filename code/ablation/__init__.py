@@ -1,7 +1,7 @@
 """Compute-matched ablation harness for the GrantAgent controlled study.
 
 Modules:
-    envload   -- load backend/.env into os.environ (zero-dependency)
+    envload   -- load a local .env into os.environ (zero-dependency)
     budget    -- LLM call/token accounting (the "same total compute" axis)
     dataset   -- build/load the sectionized eval cache from runs/paper_eval
     systems   -- the systems-under-test (baselines + ablations of the full pipeline)

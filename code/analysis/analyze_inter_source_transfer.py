@@ -36,12 +36,13 @@ warnings.simplefilter("ignore", ConvergenceWarning)
 
 import os
 import argparse
+import sys
 
 # Resolve ROOT relative to script location so the analysis is portable.
 # Override with GRANTREVIEW_ROOT env var.
 ROOT = Path(os.environ.get("GRANTREVIEW_ROOT", Path(__file__).resolve().parents[2]))
 MANIFEST = ROOT / "data" / "master_manifest_v2.json"
-OUT_JSON = ROOT / "backend" / "runs" / "analysis" / "inter_source_transfer.json"
+OUT_JSON = ROOT / "data" / "inter_source_transfer.json"
 OUT_PNG = ROOT / "paper" / "figures" / "v2_transfer_heatmap.png"
 OUT_JSON.parent.mkdir(parents=True, exist_ok=True)
 OUT_PNG.parent.mkdir(parents=True, exist_ok=True)
@@ -62,8 +63,14 @@ def funder_family(funder):
 
 
 def load_text(d):
-    """Load proposal text from disk."""
-    p = Path(d["abs_path"])
+    """Load proposal text from disk.
+
+    Document text is NOT distributed with this repository -- see the README section
+    "Where the document text lives". Fetch it into the paths named by the manifest's
+    rel_path, or point GRANTREVIEW_ROOT at a tree that already has it. Without it every
+    record loads empty and the analysis has nothing to fit.
+    """
+    p = ROOT / d["rel_path"]
     if not p.exists(): return ""
     if d.get("format") == "txt":
         try: return p.read_text(errors="ignore")
@@ -198,6 +205,14 @@ def main():
     M_LO = np.full((n_sources, n_sources), np.nan)
     M_HI = np.full((n_sources, n_sources), np.nan)
     M_P  = np.full((n_sources, n_sources), np.nan)  # one-sided permutation p
+
+    if not sources or all(not final_keep[s] for s in sources):
+        sys.exit(
+            "No proposal text was found, so there is nothing to fit.\n"
+            "This repository ships the manifest, splits, and audit artifacts -- not the\n"
+            "document text. Fetch the documents into the paths named by the manifest's\n"
+            "rel_path field (see the README section 'Where the document text lives'), or\n"
+            "set GRANTREVIEW_ROOT to a tree that already contains them, then re-run.")
 
     print(f"\n=== Inter-source transfer matrix (rows=train, cols=test) ===")
     print(f"Bootstrap iterations: {BOOTSTRAP_ITERS}; permutation iterations: {PERMUTATION_ITERS}; seed: {SEED}")

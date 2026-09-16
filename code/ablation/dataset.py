@@ -19,9 +19,9 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
 
-BACKEND_DIR = Path(__file__).resolve().parents[2]
-RUNS_DIR = BACKEND_DIR / "runs" / "paper_eval"
-CACHE_PATH = BACKEND_DIR / "scripts" / "ablation" / "eval_cache.json"
+REPO_DIR = Path(__file__).resolve().parents[2]
+RUNS_DIR = REPO_DIR / "runs" / "paper_eval"
+CACHE_PATH = REPO_DIR / "scripts" / "ablation" / "eval_cache.json"
 
 VALID_LABELS = {"awarded", "declined"}
 
@@ -133,9 +133,9 @@ def label_summary(records: list[EvalRecord]) -> dict:
 
 
 if __name__ == "__main__":
-    # Standalone cache builder:  python -m scripts.ablation.dataset
+    # Standalone cache builder:  python -m ablation.dataset
     import sys
-    sys.path.insert(0, str(BACKEND_DIR))
+    sys.path.insert(0, str(REPO_DIR))
     from . import envload
     envload.load()
     recs = build_cache()

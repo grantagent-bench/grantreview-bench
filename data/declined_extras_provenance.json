@@ -1,5 +1,5 @@
 {
-  "_comment": "Per-file provenance for the 10 declined-extra entries in GrantReview-Bench v1.0. Each entry: filename, funder, license_basis, redistribution_decision.",
+  "_comment": "Per-file provenance and redistribution decision for the 10 declined-extra entries. NOTE: the filenames here are provenance-tier labels and do NOT join to master_manifest_v2.json, whose records are keyed by opaque grb1_ identifiers. Treat this file as a per-source licensing statement for the declined-extra tier as a whole, not as a per-record join key. Reconciling the two keyings is open work.",
   "entries": [
     {
       "filename": "bbsrc_decline_1.pdf",
@@ -61,7 +61,7 @@
       "filename": "dept_ed_foia_decline_1.pdf",
       "funder_family": "US Dept of Education",
       "label": "declined",
-      "license_basis": "FOIA release (5 U.S.C. § 552; public record)",
+      "license_basis": "FOIA release (5 U.S.C. \u00a7 552; public record)",
       "redistribution_decision": "redistribute (public record)"
     },
     {

@@ -29,7 +29,7 @@ open `results/ogrants166/ablation_table.md`, or re-derive every aggregate from t
 per-item predictions — no API key, no network, no cost:
 
 ```bash
-python -m code.ablation.run --tag ogrants166 --aggregate-only
+cd code && python -m ablation.run --tag ogrants166 --aggregate-only
 ```
 
 **To evaluate your own system.** Score each proposal in `data/master_manifest_v2.json`,
@@ -40,7 +40,7 @@ place it at `results/<your-tag>/predictions.jsonl`:
 {"system": "my-system", "id": "grb1_<id>.pdf", "label": "awarded", "pred": "awarded", "score": 3.5}
 ```
 
-Then run the same `--aggregate-only` command with your tag to get accuracy, balanced
+Then run the same `--aggregate-only` command with your tag (from `code/`) to get accuracy, balanced
 accuracy, MCC, AUC with bootstrap CIs, ECE, and McNemar tests against the other arms.
 Report the metrics listed under *Recommended evaluation protocol* below.
 
@@ -48,7 +48,7 @@ Report the metrics listed under *Recommended evaluation protocol* below.
 
 ```bash
 export LLM_PROVIDER=openai LLM_MODEL=gpt-4o-mini-2024-07-18 OPENAI_API_KEY=...
-python -m code.ablation.run --systems single_call,full --source ogrants --tag my-run
+cd code && python -m ablation.run --systems single_call,full --source ogrants --tag my-run
 ```
 
 The document text is not distributed here — see *Where the document text lives* below for
@@ -58,20 +58,36 @@ how to obtain it.
 
 ```bash
 
-# §3.4 Wellcome labeling-rule audit
-python code/data/wellcome_label_audit.py --audit
-# Expected: 50/50 agreement, Wilson CI [0.929, 1.000], κ=1.000
-
+# §3.4 Wellcome labeling-rule audit — scores the shipped 50-entry gold sample.
+# Runs against this repository alone.
 python code/data/wellcome_label_audit.py --score data/wellcome_audit_gold.jsonl
-# Expected: 50/50, same Wilson CI, κ=1.000, inter-rater 50/50
+# Expected: 50/50, Wilson CI [0.929, 1.000], κ=1.000, inter-rater 50/50
 
-# §5.3 inter-source label-transfer matrix (5×5; bootstrap CIs + permutation null)
+# --audit re-derives that sample from Wellcome's raw decision manifest, which is NOT
+# shipped here (it is source data, not a release artifact). It reports what is missing
+# and exits rather than producing partial output.
+python code/data/wellcome_label_audit.py --audit
+
+# §5.3 inter-source label-transfer matrix (bootstrap CIs + permutation null).
+# Needs the document text — see "Where the document text lives". Without it the script
+# says so and exits rather than emitting an empty matrix.
 python code/analysis/analyze_inter_source_transfer.py
-# Expected: 5 sub-corpora kept (N=11/22/56/59/155); NSF→EU/ERC = 0.08 [0.00,0.32], permutation p=0.024
+# With text present: 5 sub-corpora (N=11/22/56/59/155); NSF→EU/ERC = 0.08 [0.00,0.32], permutation p=0.024
 
 # Table 6 GroupKFold AUC column (requires per-baseline run files; see code/README)
 python code/analysis/analyze_groupkfold_auc.py --runs-dir <your-runs-dir>
 ```
+
+**What runs with no extra data:** the label-audit `--score` mode and the whole ablation
+aggregation path above. Everything else needs either the document text or per-baseline run
+files, and each script now says which one it is missing instead of failing obscurely.
+
+**How to read that κ = 1.000.** In the shipped `wellcome_audit_gold.jsonl`, both rater
+columns agree with the keyword rule on all 50 rows, with no disagreements anywhere. Perfect
+agreement between two raters *and* a heuristic, over 50 items, is not plausible as an
+independent check — read this as a **consistency check confirming the rule was applied as
+written**, not as evidence that the rule is correct. Independent adjudication of the
+labeling rule, with a real disagreement rate, remains open work.
 
 All numbers are produced by these scripts with `random.seed(42)`, `np.random.seed(42)`, `StratifiedKFold(random_state=42)`, and `numpy.random.RandomState(42)` for the bootstrap (43 for the permutation null, decorrelated). LLM model snapshots pinned to `gpt-4o-2024-08-06` and `gpt-4o-mini-2024-07-18`.
 
@@ -115,10 +131,15 @@ grantreview-bench/
 │   │   ├── analyze_inter_source_transfer.py   (§5.3 transfer matrix + bootstrap + permutation)
 │   │   ├── analyze_groupkfold_auc.py          (Table 6 GroupKFold AUC column)
 │   │   └── run_baselines.py                   (per-doc score generation; pinned snapshots)
+│   ├── ablation/                              (multi-agent evaluation harness)
 │   └── data/
 │       ├── build_master_v2.py                 (master manifest builder; portable)
 │       ├── build_splits.py                    (canonical 70/15/15 splits; seed=42)
+│       ├── anonymize_release.py               (opaque-id rewrite; maintainers only)
+│       ├── remap_results.py                   (rekeys harness output onto release ids)
 │       └── wellcome_label_audit.py            (§3.4 audit; --audit and --score modes)
+├── results/                     (measured reference results)
+│   └── ogrants166/                            (13 architecture arms, N=166)
 ├── data/                        (manifests + splits + audit artifacts; NOT the documents)
 │   ├── master_manifest_v2.json                (455 application records; rel_path inside)
 │   ├── splits/canonical_v1.json               (70/15/15 + SERC holdout)
@@ -133,7 +154,10 @@ grantreview-bench/
 This repo ships the **manifest, splits, audit artifacts, and code** — but not the document text itself. Document text is distributed under three tiers (per `LICENSE.md`):
 
 - **Open Grants** (166 docs, CC BY 4.0) and **Wellcome ORF 2018/19** (155 docs, redistributed under non-commercial academic research use (US fair use + UK fair dealing) with attribution) — distributed via HuggingFace (dataset URL pending upload at paper acceptance).
-- **NIH/NSF/SERC** (124 docs) — link-only; `code/data/build_master_v2.py` fetches from per-IC URLs.
+- **NIH/NSF/SERC** (124 docs) — link-only, and obtained **manually** from the agencies'
+  public sample-application pages. There is no automated fetcher: `build_master_v2.py`
+  indexes documents already present on disk and makes no network calls, and the manifest
+  carries no per-document source URL. Adding both is open work.
 - **Declined extras** (10 docs, mixed) — per-file decision in `data/declined_extras_provenance.json`.
 
 ## Reference system results
@@ -153,7 +177,7 @@ identifiers as the manifest, so results join directly to corpus metadata.
 Re-aggregate the reports offline, without any API calls:
 
 ```bash
-python -m code.ablation.run --tag ogrants166 --aggregate-only
+cd code && python -m ablation.run --tag ogrants166 --aggregate-only
 ```
 
 Token counts are exact for the single-shot and self-consistency arms and `chars/4`

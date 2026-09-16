@@ -1,20 +1,20 @@
 """CLI orchestrator for the GrantAgent controlled ablation study.
 
-Run from the backend/ directory, e.g.:
+Run from the code/ directory, e.g.:
 
     # smoke test (no key needed; exercises plumbing in heuristic mode)
-    python -m scripts.ablation.run --systems retrieval_knn,single_call --limit 8
+    python -m ablation.run --systems retrieval_knn,single_call --limit 8
 
     # real run on 40 proposals, cheap baselines + full pipeline
-    python -m scripts.ablation.run \
+    python -m ablation.run \
         --systems single_call,multi_criteria_single_call,self_consistency,retrieval_knn,agents_only,no_debate,no_meta,no_guardrails,no_retrieval,full \
         --limit 40 --sc-n 10
 
     # stronger base model
-    LLM_MODEL=gpt-4o-2024-11-20 python -m scripts.ablation.run --systems ... --tag gpt4o
+    LLM_MODEL=gpt-4o-2024-11-20 python -m ablation.run --systems ... --tag gpt4o
 
     # offline re-score: rebuild the report from an existing checkpoint (zero LLM calls)
-    python -m scripts.ablation.run --tag ogrants166 --aggregate-only
+    python -m ablation.run --tag ogrants166 --aggregate-only
 
 Per-proposal predictions stream to a JSONL checkpoint so runs are resumable:
 re-running skips (system,id) pairs already present.  Aggregate metrics and a
@@ -29,16 +29,16 @@ import time
 from pathlib import Path
 
 # --- env must load before any grantagent import (llm singleton at import time) ---
-BACKEND_DIR = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(BACKEND_DIR))
-from scripts.ablation import envload  # noqa: E402
+REPO_DIR = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(REPO_DIR))
+from . import envload  # noqa: E402
 envload.load()
 
-from scripts.ablation import dataset, metrics as M  # noqa: E402
-from scripts.ablation.systems import SYSTEMS, BATCH_FIT, Context  # noqa: E402
-from scripts.ablation.budget import METER, meter_llm  # noqa: E402
+from . import dataset, metrics as M  # noqa: E402
+from .systems import SYSTEMS, BATCH_FIT, Context  # noqa: E402
+from .budget import METER, meter_llm  # noqa: E402
 
-OUT_DIR = BACKEND_DIR / "scripts" / "ablation" / "results"
+OUT_DIR = REPO_DIR / "results"
 
 
 def _sc_name(base: str, ctx: Context) -> str:
@@ -49,7 +49,7 @@ def _id_to_source() -> dict:
     """Map eval record id -> source_dataset (from the original run files)."""
     import glob
     m = {}
-    for fp in glob.glob(str(BACKEND_DIR / "runs" / "paper_eval" / "*.json")):
+    for fp in glob.glob(str(REPO_DIR / "runs" / "paper_eval" / "*.json")):
         stem = Path(fp).stem
         try:
             m[stem] = json.load(open(fp)).get("doc", {}).get("source_dataset", "?")

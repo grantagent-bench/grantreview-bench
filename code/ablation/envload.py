@@ -13,7 +13,7 @@ import os
 from pathlib import Path
 
 # backend/  (two levels up from scripts/ablation/envload.py)
-BACKEND_DIR = Path(__file__).resolve().parents[2]
+REPO_DIR = Path(__file__).resolve().parents[2]
 
 
 def load(path: str | os.PathLike | None = None, override: bool = False) -> dict:
@@ -21,7 +21,7 @@ def load(path: str | os.PathLike | None = None, override: bool = False) -> dict:
 
     Returns a dict of the keys that were set (values omitted for safety).
     """
-    env_path = Path(path) if path else BACKEND_DIR / ".env"
+    env_path = Path(path) if path else REPO_DIR / ".env"
     applied: dict[str, bool] = {}
     if not env_path.exists():
         return applied

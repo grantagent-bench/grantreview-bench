@@ -45,7 +45,7 @@ import random
 import re
 from pathlib import Path
 
-DATA = Path(__file__).resolve().parent
+DATA = Path(__file__).resolve().parents[2] / "data"
 MANIFEST = DATA / "master_manifest_v2.json"
 SAMPLE_OUT = DATA / "wellcome_audit_sample.jsonl"
 SEED = 42

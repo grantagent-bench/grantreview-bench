@@ -29,7 +29,6 @@ OUT_BASE = ROOT / "runs" / "baselines"
 OUT_BASE.mkdir(parents=True, exist_ok=True)
 
 sys.path.insert(0, str(ROOT))
-sys.path.insert(0, str(ROOT / ".venv/lib/python3.11/site-packages"))
 
 from openai import OpenAI
 from grantagent.ingest.extract import extract_text
@@ -197,7 +196,7 @@ def main():
             skipped += 1
             continue
 
-        fp = Path(doc["abs_path"])
+        fp = Path(doc["rel_path"])
         if not fp.exists():
             failures += 1
             continue

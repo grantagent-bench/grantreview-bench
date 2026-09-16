@@ -24,7 +24,7 @@ import random
 from pathlib import Path
 from collections import defaultdict, Counter
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[2] / "data"
 MANIFEST = ROOT / "master_manifest_v2.json"
 OUT_DIR = ROOT / "splits"
 OUT_FILE = OUT_DIR / "canonical_v1.json"
@@ -73,14 +73,14 @@ def main():
         test += ds[n_train + n_dev:]
 
     # Sanity: no overlap; covers everything
-    train_set = {d["abs_path"] for d in train}
-    dev_set = {d["abs_path"] for d in dev}
-    test_set = {d["abs_path"] for d in test}
-    shift_set = {d["abs_path"] for d in shift}
+    train_set = {d["rel_path"] for d in train}
+    dev_set = {d["rel_path"] for d in dev}
+    test_set = {d["rel_path"] for d in test}
+    shift_set = {d["rel_path"] for d in shift}
     assert len(train_set & dev_set) == 0
     assert len(train_set & test_set) == 0
     assert len(dev_set & test_set) == 0
-    assert (train_set | dev_set | test_set | shift_set) == {d["abs_path"] for d in apps}, "split coverage mismatch"
+    assert (train_set | dev_set | test_set | shift_set) == {d["rel_path"] for d in apps}, "split coverage mismatch"
 
     # Stats
     def stats(name, items):
